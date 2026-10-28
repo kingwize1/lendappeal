@@ -1,0 +1,15 @@
+name = "lendappeal-api"
+main = "index.mjs"
+compatibility_date = "2026-04-01"
+workers_dev = true          # gives you https://lendappeal-api.<your-subdomain>.workers.dev (HTTPS)
+
+[vars]
+ENVIRONMENT = "production"
+SITE_URL = "https://lendappeal.com"
+ALLOWED_ORIGIN = "https://lendappeal.com"       # CORS: only the site may call this API
+PAYMENT_PROVIDER = "manual"                     # manual | gray | redirect | stripe
+FROM_EMAIL = "LendAppeal <orders@lendappeal.com>"  # must be a verified sender domain in Resend
+
+# Secrets (never in this file):  wrangler secret put RESEND_API_KEY | ORDER_SIGNING_SECRET | ORDER_TO_EMAIL
+# (ORDER_TO_EMAIL is the private mailbox that receives orders incl. SSNs; kept out of the public repo)
+# Later for Gray:  PAYMENT_PROVIDER="gray"  +  wrangler secret put GRAY_PAYMENT_URL

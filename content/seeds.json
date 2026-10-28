@@ -1,0 +1,5 @@
+{
+  "queries": ["tradelines", "authorized user tradeline", "authorized user credit card", "piggyback credit", "primary tradeline", "business tradeline", "business credit", "paydex score", "net 30 vendors", "credit utilization", "statement date credit card", "credit card reporting date", "thin credit file", "credit age", "vantagescore authorized user", "fico 10t"],
+  "prefixes": ["how", "does", "can", "is", "what", "when", "why", "should"],
+  "x_queries": ["(tradelines OR \"authorized user\" OR \"business credit\" OR \"credit utilization\") (how OR why OR does OR should OR when) lang:en -is:retweet -is:reply"]
+}

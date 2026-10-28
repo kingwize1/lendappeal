@@ -1,0 +1,20 @@
+{
+  "_comment": "Evergreen fallback topics used when live discovery returns nothing new. The generator removes none; it logs used topics in content/topics-used.json.",
+  "topics": [
+    "What credit utilization should I aim for before a loan application?",
+    "How long does an authorized user account stay on your credit report after removal?",
+    "Does being an authorized user count as credit history for a credit card application?",
+    "What is the difference between FICO and VantageScore for authorized user accounts?",
+    "How do hard inquiries affect your score and how long do they last?",
+    "What is a business tradeline and how is it different from a vendor account?",
+    "How do net-60 vendor accounts report to business credit bureaus?",
+    "Do business credit cards report to personal credit bureaus?",
+    "How do I read the tradeline section of my credit report?",
+    "What does a credit freeze do and how do I lift it before an order posts?",
+    "How often do credit card issuers report to the bureaus and why do dates differ?",
+    "What is credit mix and how much does it matter?",
+    "How do I dispute an error on my credit report?",
+    "What is a thin credit file and how can you thicken it?",
+    "How do I time a credit card application around my statement date?"
+  ]
+}

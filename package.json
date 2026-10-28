@@ -1,0 +1,24 @@
+{
+  "name": "credit-marketplace",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Blog-first credit-building marketplace: static site + serverless order functions",
+  "scripts": {
+    "scrape": "python3 scripts/scrape-products.py",
+    "build": "node src/build.mjs",
+    "dev": "node src/build.mjs && node server.mjs",
+    "post": "node scripts/generate-post.mjs && node src/build.mjs",
+    "post:dry": "node scripts/generate-post.mjs --dry-run",
+    "screenshots": "node scripts/screenshots.mjs",
+    "worker:dev": "wrangler dev --local --config worker/wrangler.toml",
+    "worker:deploy": "wrangler deploy --config worker/wrangler.toml"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.43.1",
+    "wrangler": "^4.86.0"
+  }
+}

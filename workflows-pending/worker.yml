@@ -1,0 +1,17 @@
+name: Deploy order API (Cloudflare Worker)
+on:
+  push:
+    branches: [main]
+    paths: ["worker/**", "lib/orders.mjs", "data/products.json", "data/site.json"]
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npx --yes wrangler@4 deploy --config worker/wrangler.toml
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
