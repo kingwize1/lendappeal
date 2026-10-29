@@ -25,7 +25,7 @@ node scripts/check-links.mjs   # link + JSON-LD validation of dist/
 | `worker/index.mjs`, `worker/wrangler.toml` | Cloudflare Worker wrapper (production order API) |
 | `server.mjs` | Local server that mounts the same order API |
 | `scripts/generate-post.mjs` | Daily blog generator |
-| `workflows-pending/site.yml`, `worker.yml` (move to `.github/workflows/` once the token has the workflow scope) | Build + deploy to GitHub Pages (with daily post); deploy Worker |
+| `.github/workflows/site.yml`, `worker.yml` | Build + deploy to GitHub Pages (with daily post); deploy Worker |
 
 ## Pricing rule
 
@@ -83,7 +83,7 @@ Security note (the owner's explicit choice): SSNs are sent in plaintext email. N
 
 ## Daily blog job
 
-`workflows-pending/site.yml` (to be copied to `.github/workflows/`) runs `scripts/generate-post.mjs` daily with `LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/` and `LLM_MODEL=gemini-2.5-flash`, commits the new post, rebuilds (sitemap, RSS, llms.txt) and redeploys Pages in the same run (commits made by `GITHUB_TOKEN` do not trigger other workflows, so build and deploy are in one workflow). Pipeline: (1) **discover** questions (Google Autocomplete over `content/seeds.json`, X recent search if `X_BEARER_TOKEN`, Reddit best-effort), skipping covered topics; (2) **research** (Tavily/Brave if keyed, DuckDuckGo, plus vetted pages in `content/trusted-sources.json`); (3) **write** under strict accuracy/compliance rules; (4) **guardrails**: front-matter, short-answer box, >=3 FAQ items, >=3 sources that must be among the fetched URLs, word count, banned phrases, then an LLM **fact-check**; failures save to `content/drafts/` instead of publishing; (5) save, rebuild, deploy.
+`.github/workflows/site.yml` runs `scripts/generate-post.mjs` daily with `LLM_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/` and `LLM_MODEL=gemini-2.5-flash`, commits the new post, rebuilds (sitemap, RSS, llms.txt) and redeploys Pages in the same run (commits made by `GITHUB_TOKEN` do not trigger other workflows, so build and deploy are in one workflow). Pipeline: (1) **discover** questions (Google Autocomplete over `content/seeds.json`, X recent search if `X_BEARER_TOKEN`, Reddit best-effort), skipping covered topics; (2) **research** (Tavily/Brave if keyed, DuckDuckGo, plus vetted pages in `content/trusted-sources.json`); (3) **write** under strict accuracy/compliance rules; (4) **guardrails**: front-matter, short-answer box, >=3 FAQ items, >=3 sources that must be among the fetched URLs, word count, banned phrases, then an LLM **fact-check**; failures save to `content/drafts/` instead of publishing; (5) save, rebuild, deploy.
 Local test: `npm run post:dry` (discovery only), `node scripts/generate-post.mjs --mock --dry-run`.
 
 ## SEO / AEO
